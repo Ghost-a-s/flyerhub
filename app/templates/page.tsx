@@ -1,0 +1,2 @@
+import { CatalogClient } from "@/components/catalog-client";
+export default function TemplatesPage() { return <main className="container-page py-12 sm:py-16"><div className="mb-10 max-w-2xl"><p className="eyebrow">A.T library</p><h1 className="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">Templates, references, and live design briefs.</h1><p className="mt-4 text-muted-foreground">Browse approved work from the community. PSD templates include protected source downloads.</p></div><CatalogClient /></main>; }
