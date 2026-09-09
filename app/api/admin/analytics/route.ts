@@ -1,20 +1,6 @@
 import { NextResponse } from "next/server";
-import { getCurrentUser } from "@/lib/auth";
-export async function GET() {
-  const user = await getCurrentUser();
-  if (!user || user.role !== "ADMIN")
-    return NextResponse.json(
-      { error: "Admin access required" },
-      { status: 403 },
-    );
-  return NextResponse.json({
-    data: {
-      templates: 18,
-      approved: 16,
-      pending: 2,
-      users: 248,
-      downloadsThisMonth: 12400,
-      topCategory: "Social Media",
-    },
-  });
-}
+import { count, eq } from "drizzle-orm";
+import { getCurrentUser, requireAdmin } from "@/lib/auth";
+import { db } from "@/db";
+import { contentItems, downloads, users } from "@/db/schema";
+export async function GET() { try { requireAdmin(await getCurrentUser()); const [[content], [members], [downloadTotal], [pending]] = await Promise.all([db.select({ count: count() }).from(contentItems), db.select({ count: count() }).from(users), db.select({ count: count() }).from(downloads), db.select({ count: count() }).from(contentItems).where(eq(contentItems.moderationStatus, "PENDING"))]); return NextResponse.json({ data: { content: content.count, users: members.count, downloads: downloadTotal.count, pending: pending.count } }); } catch { return NextResponse.json({ error: "Admin access required" }, { status: 403 }); } }
