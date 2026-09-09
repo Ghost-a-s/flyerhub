@@ -1,13 +1,13 @@
 {
-  "name": "A.T PSD Library",
-  "short_name": "A.T PSD",
-  "description": "A community library for editable PSD templates, visual references, and design briefs.",
+  "name": "FlyerHub",
+  "short_name": "FlyerHub",
+  "description": "Professional PSD flyer templates. Ready to customize.",
   "id": "/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#f8fafc",
-  "theme_color": "#2c6bed",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
   "icons": [
     { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }

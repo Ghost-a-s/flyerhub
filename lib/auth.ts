@@ -2,8 +2,11 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { admin } from "better-auth/plugins";
 import nodemailer from "nodemailer";
+import { render } from "@react-email/render";
+import { createElement, type ReactElement } from "react";
 import { db } from "@/db";
 import * as schema from "@/db/schema";
+import { PasswordResetEmail } from "@/emails/password-reset-email";
 
 const appUrl = process.env.BETTER_AUTH_URL ?? process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 const asOrigin = (value?: string) => {
@@ -27,15 +30,15 @@ const trustedOrigins = Array.from(new Set([
 ].filter((origin): origin is string => Boolean(origin))));
 const smtpConfigured = Boolean(process.env.SMTP_HOST && process.env.SMTP_FROM);
 const transporter = smtpConfigured ? nodemailer.createTransport({ host: process.env.SMTP_HOST, port: Number(process.env.SMTP_PORT ?? 587), secure: process.env.SMTP_SECURE === "true", auth: process.env.SMTP_USER ? { user: process.env.SMTP_USER, pass: process.env.SMTP_PASSWORD } : undefined, connectionTimeout: 10_000, greetingTimeout: 10_000, socketTimeout: 20_000 }) : null;
-async function sendMail(to: string, subject: string, text: string) {
+async function sendMail({ to, subject, text, template }: { to: string; subject: string; text: string; template: ReactElement }) {
   if (!transporter || !process.env.SMTP_FROM) throw new Error("SMTP is not configured. Set SMTP_HOST and SMTP_FROM before enabling email authentication.");
-  await transporter.sendMail({ from: process.env.SMTP_FROM, to, subject, text });
+  const html = await render(template);
+  await transporter.sendMail({ from: process.env.SMTP_FROM, to, subject, text, html });
 }
 export const auth = betterAuth({
   baseURL: appUrl, trustedOrigins, secret: process.env.BETTER_AUTH_SECRET,
   database: drizzleAdapter(db, { provider: "pg", schema, usePlural: true }),
-  emailAndPassword: { enabled: true, requireEmailVerification: true, sendResetPassword: async ({ user, url }) => sendMail(user.email, "Reset your A.T password", `Reset your password: ${url}`) },
-  emailVerification: { autoSignInAfterVerification: true, sendOnSignUp: true, sendOnSignIn: true, sendVerificationEmail: async ({ user, url }) => sendMail(user.email, "Verify your A.T account", `Verify your email: ${url}`) },
+  emailAndPassword: { enabled: true, requireEmailVerification: false, sendResetPassword: async ({ user, url }) => sendMail({ to: user.email, subject: "Reset your FlyerHub password", text: `Reset your password: ${url}`, template: createElement(PasswordResetEmail, { appUrl, name: user.name, resetUrl: url }) }) },
   plugins: [admin({ defaultRole: "user", adminRoles: ["admin"] })],
 });
 export type SessionUser = { id: string; name: string; email: string; role?: string };

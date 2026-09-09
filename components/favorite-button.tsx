@@ -1,6 +1,7 @@
 "use client";
 import { Heart } from "lucide-react";
 import { useState } from "react";
+import { toggleFavorite as updateFavorite } from "@/lib/api/content";
 
 export function FavoriteButton({ slug }: { slug: string }) {
   const [saved, setSaved] = useState(false);
@@ -9,10 +10,12 @@ export function FavoriteButton({ slug }: { slug: string }) {
   async function toggleFavorite() {
     if (loading) return;
     setLoading(true);
-    const response = await fetch(`/api/templates/${slug}/favorite`, {
-      method: saved ? "DELETE" : "POST",
-    });
-    if (response.ok) setSaved(!saved);
+    try {
+      await updateFavorite(slug, saved);
+      setSaved(!saved);
+    } catch {
+      // The detail page keeps the current state when a signed-out request fails.
+    }
     setLoading(false);
   }
 

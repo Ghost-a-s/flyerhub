@@ -12,11 +12,11 @@ const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: {
-    default: "A.T PSD Library | Templates, References & Design Briefs",
-    template: "%s | A.T PSD Library",
+    default: "FlyerHub | Professional PSD Flyer Templates",
+    template: "%s | FlyerHub",
   },
-  description: "A community library for editable PSD templates, visual references, and design briefs.",
-  applicationName: "A.T PSD Library",
+  description: "Professional PSD flyer templates. Ready to customize.",
+  applicationName: "FlyerHub",
   manifest: "/site.webmanifest",
   icons: {
     icon: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#2c6bed",
+  themeColor: "#4f46e5",
 };
 
 export default function RootLayout({

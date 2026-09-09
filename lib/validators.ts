@@ -14,6 +14,7 @@ export const createContentSchema = z.object({
 });
 export const contentQuerySchema = z.object({ q: z.string().trim().max(120).optional(), kind: contentKindSchema.optional(), category: z.string().max(80).optional(), sort: z.enum(["newest", "popular", "favorites"]).default("newest"), limit: z.coerce.number().int().min(1).max(48).default(24) });
 export const moderationSchema = z.object({ status: z.enum(["APPROVED", "REJECTED"]), note: z.string().trim().max(500).optional() });
+export const premiumWaitlistSchema = z.object({ email: z.string().trim().email().max(254) });
 export const uploadIntentSchema = z.object({ kind: contentKindSchema, role: assetRoleSchema, filename: z.string().min(1).max(180), mimeType: z.string().min(3).max(120) }).superRefine((value, context) => {
   if (value.role === "PSD_SOURCE" && value.mimeType !== "image/vnd.adobe.photoshop" && !value.filename.toLowerCase().endsWith(".psd")) context.addIssue({ code: z.ZodIssueCode.custom, message: "PSD source uploads must be PSD files." });
   if (value.role !== "PSD_SOURCE" && !value.mimeType.startsWith("image/")) context.addIssue({ code: z.ZodIssueCode.custom, message: "Preview and reference uploads must be images." });

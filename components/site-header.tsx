@@ -28,14 +28,17 @@ export function SiteHeader() {
           className="flex items-center gap-3"
           onClick={() => setOpen(false)}
         >
-          <span className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-[#6e4cff] to-[#29b6f6] font-display text-lg font-bold text-white shadow-[0_6px_16px_rgba(91,75,220,0.25)]">
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 font-display text-lg font-bold text-white shadow-[0_8px_18px_rgba(79,70,229,0.25)]">
             F
           </span>
-          <span className="font-display text-lg font-bold tracking-tight text-navy">
+          <span className="font-display text-lg font-bold tracking-[-0.04em] text-navy">
             Flyer<span className="text-cobalt">Hub</span>
           </span>
         </Link>
-        <nav className="hidden items-center gap-7 text-sm font-bold text-slate-500 md:flex">
+        <nav className="hidden items-center gap-6 text-sm font-bold text-slate-500 lg:flex">
+          <Link className="transition hover:text-navy" href="/">
+            Home
+          </Link>
           <Link className="transition hover:text-navy" href="/templates">
             Browse Flyers
           </Link>
@@ -48,10 +51,16 @@ export function SiteHeader() {
           >
             Free Templates
           </Link>
+          <Link className="transition hover:text-navy" href="/premium">
+            Premium
+          </Link>
+          <Link className="transition hover:text-navy" href="/contributor">
+            Upload
+          </Link>
         </nav>
         <div className="hidden items-center gap-2 md:flex">
           <Link
-            href="/templates"
+            href="/search"
             aria-label="Search templates"
             className="grid h-10 w-10 place-items-center rounded-lg text-slate-500 hover:bg-mist hover:text-navy"
           >
@@ -93,7 +102,7 @@ export function SiteHeader() {
           )}
         </div>
         <button
-          className="grid h-10 w-10 place-items-center rounded-lg text-navy md:hidden"
+          className="grid h-10 w-10 place-items-center rounded-lg text-navy lg:hidden"
           aria-label="Toggle menu"
           onClick={() => setOpen(!open)}
         >
@@ -101,16 +110,25 @@ export function SiteHeader() {
         </button>
       </div>
       {open && (
-        <div className="border-t border-line bg-white px-5 py-5 md:hidden">
+        <div className="border-t border-line bg-white px-5 py-5 lg:hidden">
           <nav className="flex flex-col gap-4 text-sm font-bold text-navy">
+            <Link href="/" onClick={() => setOpen(false)}>
+              Home
+            </Link>
             <Link href="/templates" onClick={() => setOpen(false)}>
               Browse Flyers
             </Link>
             <Link href="/categories" onClick={() => setOpen(false)}>
               Categories
             </Link>
-            <Link href="/templates?sort=popular" onClick={() => setOpen(false)}>
+            <Link href="/premium" onClick={() => setOpen(false)}>
               Free Templates
+            </Link>
+            <Link href="/templates?sort=popular" onClick={() => setOpen(false)}>
+              Premium
+            </Link>
+            <Link href="/contributor" onClick={() => setOpen(false)}>
+              Upload
             </Link>
             <div className="flex gap-2 pt-2">
               {userName ? (

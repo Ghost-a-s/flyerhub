@@ -6,7 +6,7 @@ export default function RegisterPage() {
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <Link href="/" className="font-display text-xl font-bold text-navy">
-            A.T PSD
+            FlyerHub
           </Link>
           <h1 className="mt-8 font-display text-3xl font-bold text-navy">
             Make room for better work.
