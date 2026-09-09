@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Inter, Raleway } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { QueryProvider } from "@/components/providers/query-provider";
 
 const ralewayHeading = Raleway({subsets:['latin'],variable:'--font-heading'});
 
@@ -23,9 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("font-sans", inter.variable, ralewayHeading.variable)}>
       <body>
-        <SiteHeader />
-        {children}
-        <SiteFooter />
+        <QueryProvider>
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+        </QueryProvider>
       </body>
     </html>
   );
