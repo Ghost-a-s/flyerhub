@@ -10,6 +10,8 @@
     "typecheck": "tsc --noEmit",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
+    "db:prepare": "npm run db:migrate",
+    "prebuild": "npm run db:prepare",
     "db:seed": "tsx db/seed.ts"
   },
   "dependencies": {
