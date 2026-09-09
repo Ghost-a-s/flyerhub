@@ -14,7 +14,7 @@ export const users = pgTable("user", {
 export const sessions = pgTable("session", {
   id: text("id").primaryKey(), expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(), token: text("token").notNull().unique(),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(), updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
-  ipAddress: text("ip_address"), userAgent: text("user_agent"), userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  ipAddress: text("ip_address"), userAgent: text("user_agent"), impersonatedBy: text("impersonated_by"), userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
 }, (table) => ({ userIndex: index("session_user_idx").on(table.userId) }));
 export const accounts = pgTable("account", {
   id: text("id").primaryKey(), accountId: text("account_id").notNull(), providerId: text("provider_id").notNull(), userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
