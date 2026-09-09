@@ -2,20 +2,28 @@
 import Link from "next/link";
 import { Heart, Menu, Search, X } from "lucide-react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 import { authClient } from "@/lib/auth-client";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
+  const router = useRouter();
+  const queryClient = useQueryClient();
   const { data: session } = authClient.useSession();
   const userName = session?.user.name ?? null;
+  const userImage = (session?.user as { image?: string | null } | undefined)?.image;
   const isAdmin = (session?.user as { role?: string } | undefined)?.role === "admin";
 
   async function signOut() {
     setSigningOut(true);
     try {
       await authClient.signOut();
+      queryClient.clear();
       setOpen(false);
+      router.replace("/");
+      router.refresh();
     } finally {
       setSigningOut(false);
     }
@@ -79,6 +87,7 @@ export function SiteHeader() {
                 href={isAdmin ? "/admin" : "/dashboard"}
                 className="button-primary ml-1"
               >
+                {userImage && <img src={userImage} alt="" className="h-5 w-5 rounded-full object-cover" />}
                 {isAdmin ? "Admin dashboard" : userName}
               </Link>
               <button

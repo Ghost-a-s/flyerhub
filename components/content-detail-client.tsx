@@ -1,6 +1,7 @@
 "use client";
 
-import { Download, ImageIcon, LoaderCircle, ShieldCheck, Star } from "lucide-react";
+import Link from "next/link";
+import { ChevronLeft, Download, ImageIcon, LoaderCircle, ShieldCheck, Star } from "lucide-react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FavoriteButton } from "@/components/favorite-button";
@@ -47,6 +48,13 @@ export function ContentDetailClient({ slug }: { slug: string }) {
 
   return (
     <article className="mx-auto max-w-7xl">
+      <nav aria-label="Flyer navigation" className="mb-7 flex items-center justify-between border-b border-line pb-4">
+        <Link href="/templates" className="inline-flex items-center gap-1 text-sm font-bold text-slate-600 transition hover:text-indigo-700">
+          <ChevronLeft size={18} />
+          Back to Browse Flyers
+        </Link>
+        <Link href="/categories" className="text-sm font-bold text-indigo-600 transition hover:text-indigo-800">Categories</Link>
+      </nav>
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.85fr)] lg:gap-16">
         <section>
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-[0_24px_55px_-32px_rgba(24,24,43,0.55)]">

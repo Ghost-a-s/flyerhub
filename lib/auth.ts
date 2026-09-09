@@ -4,6 +4,7 @@ import { admin } from "better-auth/plugins";
 import nodemailer from "nodemailer";
 import { render } from "@react-email/render";
 import { createElement, type ReactElement } from "react";
+import { connect } from "net";
 import { db } from "@/db";
 import * as schema from "@/db/schema";
 import { PasswordResetEmail } from "@/emails/password-reset-email";
@@ -29,7 +30,7 @@ const trustedOrigins = Array.from(new Set([
   ...(process.env.NODE_ENV === "production" ? [] : ["http://localhost:*", "http://127.0.0.1:*"]),
 ].filter((origin): origin is string => Boolean(origin))));
 const smtpConfigured = Boolean(process.env.SMTP_HOST && process.env.SMTP_FROM);
-const transporter = smtpConfigured ? nodemailer.createTransport({ host: process.env.SMTP_HOST, port: Number(process.env.SMTP_PORT ?? 587), secure: process.env.SMTP_SECURE === "true", auth: process.env.SMTP_USER ? { user: process.env.SMTP_USER, pass: process.env.SMTP_PASSWORD } : undefined, connectionTimeout: 10_000, greetingTimeout: 10_000, socketTimeout: 20_000 }) : null;
+const transporter = smtpConfigured ? nodemailer.createTransport({ host: process.env.SMTP_HOST, port: Number(process.env.SMTP_PORT ?? 587), secure: process.env.SMTP_SECURE === "true", auth: process.env.SMTP_USER ? { user: process.env.SMTP_USER, pass: process.env.SMTP_PASSWORD } : undefined, connectionTimeout: 10_000, greetingTimeout: 10_000, socketTimeout: 20_000, getSocket: (_, callback) => { const connection = connect({ host: process.env.SMTP_HOST!, port: Number(process.env.SMTP_PORT ?? 587), family: 4 }); connection.once("error", callback); connection.once("connect", () => callback(null, { connection })); } }) : null;
 async function sendMail({ to, subject, text, template }: { to: string; subject: string; text: string; template: ReactElement }) {
   if (!transporter || !process.env.SMTP_FROM) throw new Error("SMTP is not configured. Set SMTP_HOST and SMTP_FROM before enabling email authentication.");
   const html = await render(template);

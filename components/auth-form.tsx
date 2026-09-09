@@ -165,6 +165,13 @@ export function AuthForm({ mode }: { mode: "login" | "register" | "admin" }) {
           </span>
         )}
       </label>
+      {mode === "login" && (
+        <div className="-mt-1 text-right">
+          <Link className="text-sm font-semibold text-primary hover:underline" href="/forgot-password">
+            Forgot password?
+          </Link>
+        </div>
+      )}
       {form.formState.errors.root && (
         <p className="text-sm text-destructive">
           {form.formState.errors.root.message}
