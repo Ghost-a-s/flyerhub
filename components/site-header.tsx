@@ -1,37 +1,24 @@
 "use client";
 import Link from "next/link";
 import { Heart, Menu, Search, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const [userName, setUserName] = useState<string | null>(null);
-  const [isAdmin, setIsAdmin] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
-  useEffect(() => {
-    const loadUser = () => {
-      fetch("/api/auth/session")
-        .then((response) => response.json())
-        .then((result) => {
-          setUserName(result.user?.name ?? null);
-          setIsAdmin(result.user?.role === "ADMIN");
-        })
-        .catch(() => {
-          setUserName(null);
-          setIsAdmin(false);
-        });
-    };
-    loadUser();
-    window.addEventListener("flyerhub-auth-changed", loadUser);
-    return () => window.removeEventListener("flyerhub-auth-changed", loadUser);
-  }, []);
+  const { data: session } = authClient.useSession();
+  const userName = session?.user.name ?? null;
+  const isAdmin = (session?.user as { role?: string } | undefined)?.role === "admin";
+
   async function signOut() {
     setSigningOut(true);
-    await fetch("/api/auth/session", { method: "DELETE" });
-    setUserName(null);
-    setSigningOut(false);
-    setOpen(false);
-    window.dispatchEvent(new Event("flyerhub-auth-changed"));
+    try {
+      await authClient.signOut();
+      setOpen(false);
+    } finally {
+      setSigningOut(false);
+    }
   }
   return (
     <header className="sticky top-0 z-40 border-b border-line/80 bg-white/95 backdrop-blur">
