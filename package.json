@@ -2,6 +2,7 @@
   "name": "at-psd-platform",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@11.22.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,7 +14,6 @@
     "db:check": "drizzle-kit check",
     "db:verify": "tsx db/verify.ts",
     "db:prepare": "npm run db:migrate",
-    "postinstall": "pnpm run db:migrate",
     "prebuild": "npm run db:prepare",
     "db:seed": "tsx db/seed.ts",
     "catalog:commons": "tsx db/import-commons.ts"
