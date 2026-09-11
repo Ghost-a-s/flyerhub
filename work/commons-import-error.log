@@ -1,0 +1,46 @@
+$ tsx db/import-commons.ts
+birthday-flyers: skipped File:National Birthday Trust Fund; poster of Guildhall Reception Wellcome L0021060.jpg: Unable to download Commons image: 429
+birthday-flyers: skipped File:National Birthday Trust Fund Papers; poster; Elijah Wellcome L0021061.jpg: Unable to download Commons image: 429
+party-flyers: skipped File:2010 election poster Poster PvdA2.jpg: Unable to download Commons image: 429
+party-flyers: skipped File:1971 election poster PvdA.jpg: Unable to download Commons image: 429
+restaurant-flyers: skipped File:Poster, "Half-hanged McNaughton" - geograph.org.uk - 1402311.jpg: Unable to download Commons image: 429
+restaurant-flyers: skipped File:Cabaret Mest Up poster 2011.JPG: Unable to download Commons image: 429
+restaurant-flyers: skipped File:Cabaret Mother Freaker poster 2012.JPG: Unable to download Commons image: 429
+restaurant-flyers: skipped File:Vår kabaré poster 2015.JPG: Unable to download Commons image: 429
+restaurant-flyers: skipped File:Wild Side Story poster 1973 adjusted.JPG: Unable to download Commons image: 429
+restaurant-flyers: skipped File:Wild Side Story poster 1997.JPG: Unable to download Commons image: 429
+restaurant-flyers: skipped File:Wild Side Story poster 2000.JPG: Unable to download Commons image: 429
+restaurant-flyers: skipped File:Wild Side Story poster 2003 (2).JPG: Unable to download Commons image: 429
+restaurant-flyers: skipped File:Poster BurgerKing@Station Amsterdam Centraal.JPG: Unable to download Commons image: 429
+restaurant-flyers: skipped File:Fulltimers gezocht poster at the Mr. Dam restaurant, Groningen (2020).jpg: {
+  message: 'Context Invalid encoding in context',
+  name: 'Error',
+  http_code: 400
+}
+event-flyers: skipped File:New Flyer Xcelsior.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:Wikidata event flyer Welsh.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:James River State Park event flyer (36807832454).jpg: Unable to download Commons image: 429
+event-flyers: skipped File:Afrocuration Flyer December-2020 update.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:Art and Feminism at the University of Ilorin flyer for 2021 1st event.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:Sähkö Flyer Elektro 1993.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:Elektro Flyer 1992.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:Twi Translate Workshop Flyer 1.png: Unable to download Commons image: 429
+event-flyers: skipped File:Winchester, Kite Flyer - geograph.org.uk - 3569560.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:View from the Edinburgh Star Flyer - geograph.org.uk - 4266461.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:View from the Edinburgh Star Flyer - geograph.org.uk - 4266468.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:View from the Edinburgh Star Flyer - geograph.org.uk - 4266473.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:Wikimedia Anambra Network Event Flyer 2.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:Event Flyer for PattyPan Training Workshop.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:Event Registration tool flyer.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:Wiktionary event flyer.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:Startup SouthX Offical event Flyer . 2.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:Flyer for Roslyn Event.png: Unable to download Commons image: 429
+event-flyers: skipped File:Event flyer for the WUGN end of the year capacity building workshop.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:Event Flyer.png: Unable to download Commons image: 429
+event-flyers: skipped File:Event flyer.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:Data, Dignity, and Difference In-person event in Owerri flyer.png: Unable to download Commons image: 429
+event-flyers: skipped File:Data, Dignity, and Difference In-person event in Awka flyer.png: Unable to download Commons image: 429
+event-flyers: skipped File:30FOR30 Event Flyer.jpg: Unable to download Commons image: 429
+event-flyers: skipped File:An event flyer 30F0R30.png: Unable to download Commons image: 429
+event-flyers: skipped File:Flyer for online event Kinyarwanda editathon 01.png: Unable to download Commons image: 429
+event-flyers: skipped File:Event flyer clean up, fixing redlink references.png: Unable to download Commons image: 429

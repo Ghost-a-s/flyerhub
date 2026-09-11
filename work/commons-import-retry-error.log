@@ -1,0 +1,1 @@
+$ tsx db/import-commons.ts

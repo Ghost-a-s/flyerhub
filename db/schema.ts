@@ -154,6 +154,9 @@ export const contentItems = pgTable(
       .notNull()
       .references(() => users.id),
     externalContactUrl: text("external_contact_url"),
+    sourceUrl: text("source_url"),
+    sourceAuthor: text("source_author"),
+    sourceLicense: text("source_license"),
     dimensions: text("dimensions"),
     softwareVersion: text("software_version"),
     license: licenseEnum("license"),

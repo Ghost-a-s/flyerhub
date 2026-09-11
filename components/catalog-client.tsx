@@ -8,7 +8,9 @@ export function CatalogClient({ categorySlug }: { categorySlug?: string }) {
   const query = useQuery({
     queryKey: contentKeys.list({ category: categorySlug }),
     queryFn: () =>
-      categorySlug ? fetchContentByCategory(categorySlug) : fetchContent(),
+      categorySlug
+        ? fetchContentByCategory(categorySlug, { limit: "48" })
+        : fetchContent({ limit: "48" }),
   });
   if (query.isLoading)
     return (
