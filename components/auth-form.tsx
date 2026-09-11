@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { type FormEvent, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -67,25 +67,14 @@ export function AuthForm({ mode }: { mode: "login" | "register" | "admin" }) {
 
       const isAdmin =
         (result.data?.user as { role?: string } | undefined)?.role === "admin";
-      // Better Auth has set the session cookie at this point. A document navigation
-      // guarantees every protected query starts with that new authenticated session.
-      window.location.assign(
-        mode === "admin" || isAdmin ? "/admin" : "/dashboard",
-      );
+      // Better Auth has set the session cookie at this point. Use App Router
+      // navigation so signing in does not trigger a full document reload.
+      router.replace(mode === "admin" || isAdmin ? "/admin" : "/dashboard");
     } catch {
       form.setError("root", {
         message: "Unable to reach the sign-in service. Please try again.",
       });
     }
-  };
-
-  // React Hook Form normally prevents the browser's native form submission.
-  // Keep that safeguard explicit so an unsuccessful authentication request can
-  // never turn into a GET navigation containing the email/password fields.
-  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
-    // Authentication is intentionally handled by the server form routes. This
-    // keeps redirects and Better Auth cookies reliable even before hydration.
-    return;
   };
 
   const resendVerification = async () => {
@@ -110,17 +99,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" | "admin" }) {
   };
 
   return (
-    <form
-      action={
-        mode === "register" ? "/api/auth/form-register" : "/api/auth/form-login"
-      }
-      method="post"
-      onSubmit={handleFormSubmit}
-      className="space-y-4"
-    >
-      {mode !== "register" && (
-        <input type="hidden" name="callbackURL" value={postLoginPath} />
-      )}
+    <form onSubmit={form.handleSubmit(submit)} noValidate className="space-y-4">
       {mode === "register" && (
         <label className="grid gap-2 text-sm font-medium">
           Name
@@ -142,7 +121,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" | "admin" }) {
           required
           className="h-11 rounded-md border bg-background px-3"
           {...form.register("email")}
-          autoComplete="disabled"
+          autoComplete="email"
         />
         {form.formState.errors.email && (
           <span className="text-xs text-destructive">
@@ -158,6 +137,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" | "admin" }) {
           minLength={8}
           className="h-11 rounded-md border bg-background px-3"
           {...form.register("password")}
+          autoComplete={mode === "register" ? "new-password" : "current-password"}
         />
         {form.formState.errors.password && (
           <span className="text-xs text-destructive">
