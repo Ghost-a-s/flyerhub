@@ -43,6 +43,13 @@
       "when": 1789099200000,
       "tag": "0005_commons_attribution",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1789165155957,
+      "tag": "0006_abnormal_mentallo",
+      "breakpoints": true
     }
   ]
 }
