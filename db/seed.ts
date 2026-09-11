@@ -4,7 +4,7 @@ import { readdirSync } from "fs";
 import { join } from "path";
 import { eq } from "drizzle-orm";
 import { v2 as cloudinary } from "cloudinary";
-import { db, sql } from "./index";
+import { db, pool } from "./index";
 import { auth } from "@/lib/auth";
 import { categories, contentAssets, contentItems, tags, users } from "./schema";
 
@@ -32,4 +32,4 @@ async function main() {
 }
 main()
   .catch((error) => { console.error(error); process.exitCode = 1; })
-  .finally(async () => { await sql.end({ timeout: 5 }); });
+  .finally(async () => { await pool.end(); });

@@ -4,7 +4,7 @@ import { Readable } from "stream";
 import { and, eq, sql as drizzleSql } from "drizzle-orm";
 import { v2 as cloudinary } from "cloudinary";
 import type { UploadApiOptions, UploadApiResponse } from "cloudinary";
-import { db, sql as connection } from "./index";
+import { db, pool } from "./index";
 import { categories, contentAssets, contentItems, users } from "./schema";
 
 const TARGET_PER_CATEGORY = 31;
@@ -180,4 +180,4 @@ async function main() {
 
 main()
   .catch((error) => { console.error(error); process.exitCode = 1; })
-  .finally(async () => { await connection.end({ timeout: 5 }); });
+  .finally(async () => { await pool.end(); });

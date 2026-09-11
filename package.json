@@ -10,7 +10,10 @@
     "typecheck": "tsc --noEmit",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
+    "db:check": "drizzle-kit check",
+    "db:verify": "tsx db/verify.ts",
     "db:prepare": "npm run db:migrate",
+    "postinstall": "pnpm run db:migrate",
     "prebuild": "npm run db:prepare",
     "db:seed": "tsx db/seed.ts",
     "catalog:commons": "tsx db/import-commons.ts"
@@ -36,6 +39,7 @@
     "lucide-react": "^0.468.0",
     "next": "^14.2.15",
     "nodemailer": "^10.0.1",
+    "pg": "^8.23.0",
     "postgres": "^3.4.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -46,6 +50,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.16.10",
+    "@types/pg": "^8.23.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.20",
